@@ -4,6 +4,7 @@ class wordPlay{
         this.sixLetterWords = [];
     }
 
+    // Takes in the English dictionary and picks a random 6 letter word for the user to guess
     randomSixLetterWord() {
         for(let i = 0; i < this.words.length; i++) {
             if(this.words[i].length == 6) {
@@ -12,15 +13,33 @@ class wordPlay{
         }
         const randomIndex = Math.floor(Math.random() * this.sixLetterWords.length);
         const randomWord = this.sixLetterWords[randomIndex];
+        console.log(randomWord);
         return randomWord;
     }
 
-    //scrambleRootWord(word) {}
+    // Scrambles the root word and prints it to the console
+    scrambleRootWord(word) {
+        const wordArray = word.split("");
+        const wordArrayLength = wordArray.length;
+        
+        for (let i = 0; i < wordArrayLength; i++) {
+            const ranNum = Math.floor(Math.random() * wordArrayLength);
+
+            let temp = wordArray[i];
+            wordArray[i] = wordArray[ranNum];
+            wordArray[ranNum] = temp;
+        }
+        //check to see if this is a valid method or choose another method
+        word = wordArray.join("");
+        console.log(word);
+        return word;
+    }
 }
 
-const tester = new wordPlay();
-//console.log(tester.words);
-tester.randomSixLetterWord();
+//creates an instance of wordPlay to test methods
+//const tester = new wordPlay();
+//const word = tester.randomSixLetterWord();
+//tester.scrambleRootWord(word);
 
 // testing to see if console is working
 //alert("word is not a valid English word (or too short/long)");
