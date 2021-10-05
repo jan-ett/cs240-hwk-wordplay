@@ -1,14 +1,17 @@
 class wordPlay{
     constructor(dictionary) {
         this.words = dictionary;
+        this.sixLetterWords = [];
     }
 
     randomSixLetterWord() {
-        const sixLetterWords = [];
         for(let i = 0; i < this.words.size(); i++) {
             if(this.words[i].length == 6) {
-                sixLetterWords.push(this.words[i]);
+                this.sixLetterWords.push(this.words[i]);
             }
         }
+        const randomIndex = Math.floor(Math.random() * this.sixLetterWords.length);
+        const randomWord = this.sixLetterWords[randomIndex];
+        return randomWord;
     }
 }
