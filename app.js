@@ -12,6 +12,7 @@ class wordPlay{
         }
         const randomIndex = Math.floor(Math.random() * this.sixLetterWords.length);
         const randomWord = this.sixLetterWords[randomIndex];
-        console.log(randomWord);
+        return randomWord;
     }
 }
+alert("word is not a valid English word (or too short/long)");
