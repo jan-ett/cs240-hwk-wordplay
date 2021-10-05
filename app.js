@@ -1,6 +1,6 @@
 class wordPlay{
     constructor(dictionary) {
-        this.words = dictionary;
+        this.words = this.dictionary;
         this.sixLetterWords = [];
     }
 
@@ -12,6 +12,6 @@ class wordPlay{
         }
         const randomIndex = Math.floor(Math.random() * this.sixLetterWords.length);
         const randomWord = this.sixLetterWords[randomIndex];
-        return randomWord;
+        console.log(randomWord);
     }
 }
