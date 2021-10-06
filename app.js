@@ -2,6 +2,7 @@ class wordPlay{
     constructor(wordBank) {
         this.words = dictionary;
         this.sixLetterWords = [];
+        this.subsetofWords = [];
     }
 
     // Takes in the English dictionary and picks a random 6 letter word for the user to guess
@@ -34,10 +35,21 @@ class wordPlay{
         console.log(word);
         return word;
     }
+
+    // Creates an array of words that are 3-6 characters long
+    subsetWords() {
+        for (let i = 0; i < this.words.length; i++) {
+            if (this.words[i].length <= 6 && this.words[i].length >= 3) {
+                this.subsetofWords.push(this.words[i]);
+            }
+        }
+        console.log(this.subsetofWords);
+    }
 }
 
 //creates an instance of wordPlay to test methods
-//const tester = new wordPlay();
+const tester = new wordPlay();
+tester.subsetWords();
 //const word = tester.randomSixLetterWord();
 //tester.scrambleRootWord(word);
 
