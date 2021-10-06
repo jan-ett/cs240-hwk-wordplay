@@ -57,12 +57,27 @@ class wordPlay{
         }
         console.log(this.subset);
     }
+    
+    // Prints the words that the user must guess from the subset of words array
+    printWordstoGuess() {
+        for (let i = 0; i < this.subset.length; i++) {
+            var pattern = "";
+            for (let x = 0; x < this.subset[i].length; x++) {
+                pattern += "_ ";
+            }
+        }
+
+        console.log(pattern);
+    }
+
+    userInteraction() {}
 }
 
 //creates an instance of wordPlay to test methods
 const tester = new wordPlay();
 const word = tester.randomSixLetterWord();
 tester.subsetWords();
+tester.printWordstoGuess();
 //tester.scrambleRootWord(word);
 
 // testing to see if console is working
