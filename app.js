@@ -32,9 +32,8 @@ class wordPlay{
             wordArray[i] = wordArray[ranNum];
             wordArray[ranNum] = temp;
         }
-        //check to see if this is a valid method or choose another method
         word = wordArray.join("");
-        console.log(word);
+        console.log("Letters available: " + word);
         return word;
     }
 
@@ -70,43 +69,39 @@ class wordPlay{
             }
         }
         console.log(rootWordCounts);
-
-        // for (let i = 0; i < this.subsetofWords.length; i++) {
-        //     let currentWord = this.subsetofWords[i];
-        //     let rootWord = this.sixLetterWord;
-        //     for (let j = 0; j < currentWord.length; j++){
-        //         let count = 0;
-        //         let rootCount = 0;
-        //         for (let x = 0; x < currentWord.length; x++) {
-        //             if (currentWord[j] == currentWord[x] && j >x ) {
-        //                 break;
-        //             }
-        //             if (currentWord[j] == currentWord[x]) {
-        //                 count++;
-        //             }
-        //         }
-        //     }
-        // }
-        //console.log(this.subset);
     }
     
     // Prints the words that the user must guess from the subset of words array
     printWordstoGuess() {
-        for (let i = 0; i < this.subset.length; i++) {
+        //const set = ["hi", "hello", "blue", "green"];
+        for(let i = 0; i < this.subsetofWords.length; i++) {
             var pattern = "";
-            for (let x = 0; x < this.subset[i].length; x++) {
+            for(let j = 0; j < this.subsetofWords[i].length; j++) {
                 pattern += "_ ";
             }
+            console.log(pattern);
+            //console.log(this.subsetofWords[i]);
         }
+        // for (let i = 0; i < this.subset.length; i++) {
+        //     var pattern = "";
+        //     for (let x = 0; x < this.subset[i].length; x++) {
+        //         pattern += "_ ";
+        //     }
+        // }
 
-        console.log(pattern);
+        // console.log(pattern);
     }
 
     userInteraction() {
         let input = prompt("Enter your guess:");
-        while(input != null) {
+        if(input != null) {
             if (!this.subset.includes(input)) {
-                alert(input + "is not a valid English word");
+                alert(input + " is not a valid English word");
+                
+            }
+            else if (!(input.length <= 6 && input.length >= 3)) {
+                alert("Your guess is too short");
+
             }
 
         }
@@ -115,8 +110,8 @@ class wordPlay{
 
 //creates an instance of wordPlay to test methods
 const tester = new wordPlay();
-const word = tester.randomSixLetterWord();
+const w = tester.randomSixLetterWord();
+//tester.scrambleRootWord(w);
 tester.subsetWords();
 //tester.userInteraction();
-//tester.printWordstoGuess();
-//tester.scrambleRootWord(word);
+tester.printWordstoGuess();
