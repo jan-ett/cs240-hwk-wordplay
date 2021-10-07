@@ -47,33 +47,46 @@ class wordPlay{
         }
         console.log(this.subsetofWords);
 
+        const wordtoCheck = {};
         for (let i = 0; i < this.subsetofWords.length; i++) {
-            let currentWord = this.subsetofWords[i];
-            for (let j = 0; j < currentWord.length; j++){
-                let count = 0;
-                for (let x = 0; x < currentWord.length; x++) {
-                    if (currentWord[j] == currentWord[x] && j >x ) {
-                        break;
-                    }
-                    if (currentWord[j] == currentWord[x]) {
-                        count++;
-                    }
+            const currentWord = this.subsetofWords[i];
+            for(let j = 0; j < currentWord.length; j++)
+                if(wordtoCheck[currentWord[j]]) {
+                    wordtoCheck[currentWord[j]] = wordtoCheck[currentWord[j]] + 1;
                 }
+                else {
+                    wordtoCheck[currentWord[j]] = 1;
+                }
+        }
+        console.log(wordtoCheck);
 
-                if (count > 0) {
-                    console.log(`${currentWord[j]} occurs ${count} times`);
-                }
+        const rootWordCounts = {};
+        for (let i = 0; i < this.sixLetterWord.length; i++) {
+            if(rootWordCounts[this.sixLetterWord[i]]) {
+                rootWordCounts[this.sixLetterWord[i]] = rootWordCounts[this.sixLetterWord[i]] + 1;
+            }
+            else {
+                rootWordCounts[this.sixLetterWord[i]] = 1;
             }
         }
+        console.log(rootWordCounts);
 
-        //creates a subset of words that only contains characters in the randomly chosen word
-        //for (let i = 0; i < this.subsetofWords.length; i++) {
-            //if (this.subsetofWords[i].includes(this.sixLetterWord[0]) && this.subsetofWords[i].includes(this.sixLetterWord[1])
-            //&& this.subsetofWords[i].includes(this.sixLetterWord[2]) && this.subsetofWords[i].includes(this.sixLetterWord[3])
-            //&& this.subsetofWords[i].includes(this.sixLetterWord[4]) && this.subsetofWords[i].includes(this.sixLetterWord[5])){
-                //this.subset.push(this.subsetofWords[i]);
-            //}
-        //}
+        // for (let i = 0; i < this.subsetofWords.length; i++) {
+        //     let currentWord = this.subsetofWords[i];
+        //     let rootWord = this.sixLetterWord;
+        //     for (let j = 0; j < currentWord.length; j++){
+        //         let count = 0;
+        //         let rootCount = 0;
+        //         for (let x = 0; x < currentWord.length; x++) {
+        //             if (currentWord[j] == currentWord[x] && j >x ) {
+        //                 break;
+        //             }
+        //             if (currentWord[j] == currentWord[x]) {
+        //                 count++;
+        //             }
+        //         }
+        //     }
+        // }
         //console.log(this.subset);
     }
     
@@ -89,19 +102,21 @@ class wordPlay{
         console.log(pattern);
     }
 
-    //userInteraction() {
-        //while(true) {
-            //let input = prompt("Enter your guess:");
-            //if (input === null) {
-                //false;
-            //}
-        //}
-    //}
+    userInteraction() {
+        let input = prompt("Enter your guess:");
+        while(input != null) {
+            if (!this.subset.includes(input)) {
+                alert(input + "is not a valid English word");
+            }
+
+        }
+    }
 }
 
 //creates an instance of wordPlay to test methods
 const tester = new wordPlay();
 const word = tester.randomSixLetterWord();
 tester.subsetWords();
+//tester.userInteraction();
 //tester.printWordstoGuess();
 //tester.scrambleRootWord(word);
