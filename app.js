@@ -69,42 +69,30 @@ class wordPlay{
             }
         }
         console.log(rootWordCounts);
+
+        for (let key in wordtoCheck) {
+            for (let key2 in rootWordCounts) {
+                if (wordtoCheck[key] <= rootWordCounts[key2]) {
+                    this.subset.push(this.subsetofWords[i]);
+                }
+            }
+        }
+        console.log(this.subset);
     }
     
     // Prints the words that the user must guess from the subset of words array
     printWordstoGuess() {
-        //const set = ["hi", "hello", "blue", "green"];
-        for(let i = 0; i < this.subsetofWords.length; i++) {
+        for(let i = 0; i < this.subset.length; i++) {
             var pattern = "";
-            for(let j = 0; j < this.subsetofWords[i].length; j++) {
+            for(let j = 0; j < this.subset[i].length; j++) {
                 pattern += "_ ";
             }
             console.log(pattern);
-            //console.log(this.subsetofWords[i]);
         }
-        // for (let i = 0; i < this.subset.length; i++) {
-        //     var pattern = "";
-        //     for (let x = 0; x < this.subset[i].length; x++) {
-        //         pattern += "_ ";
-        //     }
-        // }
-
-        // console.log(pattern);
     }
 
     userInteraction() {
         let input = prompt("Enter your guess:");
-        if(input != null) {
-            if (!this.subset.includes(input)) {
-                alert(input + " is not a valid English word");
-                
-            }
-            else if (!(input.length <= 6 && input.length >= 3)) {
-                alert("Your guess is too short");
-
-            }
-
-        }
     }
 }
 
