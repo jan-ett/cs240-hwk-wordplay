@@ -18,6 +18,7 @@ class wordPlay{
         const randomWord = this.sixLetterWords[randomIndex];
         this.sixLetterWord = randomWord;
         console.log(randomWord);
+        return randomWord;
     }
 
     // Scrambles the root word and prints it to the console
@@ -46,19 +47,6 @@ class wordPlay{
         }
         console.log(this.subsetofWords);
 
-        const wordtoCheck = {};
-        for (let i = 0; i < this.subsetofWords.length; i++) {
-            const currentWord = this.subsetofWords[i];
-            for(let j = 0; j < currentWord.length; j++)
-                if(wordtoCheck[currentWord[j]]) {
-                    wordtoCheck[currentWord[j]] = wordtoCheck[currentWord[j]] + 1;
-                }
-                else {
-                    wordtoCheck[currentWord[j]] = 1;
-                }
-        }
-        console.log(wordtoCheck);
-
         const rootWordCounts = {};
         for (let i = 0; i < this.sixLetterWord.length; i++) {
             if(rootWordCounts[this.sixLetterWord[i]]) {
@@ -70,20 +58,34 @@ class wordPlay{
         }
         console.log(rootWordCounts);
 
-        for (let key in wordtoCheck) {
-            for (let key2 in rootWordCounts) {
-                if (wordtoCheck[key] <= rootWordCounts[key2]) {
-                    this.subset.push(this.subsetofWords[i]);
+        for (let i = 0; i < this.subsetofWords.length; i++) {
+            const currentWord = this.subsetofWords[i];
+            const wordtoCheck = {};
+            for(let j = 0; j < currentWord.length; j++)
+                if(wordtoCheck[currentWord[j]]) {
+                    wordtoCheck[currentWord[j]] = wordtoCheck[currentWord[j]] + 1;
                 }
-            }
+                else {
+                    wordtoCheck[currentWord[j]] = 1;
+                }
+
+                console.log(wordtoCheck);
         }
+
+        // for (let key in wordtoCheck) {
+        //     for (let key2 in rootWordCounts) {
+        //         if (wordtoCheck[key] <= rootWordCounts[key2]) {
+        //             this.subset.push(this.subsetofWords[i]);
+        //         }
+        //     }
+        // }
         console.log(this.subset);
     }
     
     // Prints the words that the user must guess from the subset of words array
     printWordstoGuess() {
         for(let i = 0; i < this.subset.length; i++) {
-            var pattern = "";
+            let pattern = "";
             for(let j = 0; j < this.subset[i].length; j++) {
                 pattern += "_ ";
             }
@@ -99,7 +101,7 @@ class wordPlay{
 //creates an instance of wordPlay to test methods
 const tester = new wordPlay();
 const w = tester.randomSixLetterWord();
-//tester.scrambleRootWord(w);
+tester.scrambleRootWord(w);
 tester.subsetWords();
 //tester.userInteraction();
 tester.printWordstoGuess();
