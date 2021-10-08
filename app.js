@@ -61,15 +61,27 @@ class wordPlay{
         for (let i = 0; i < this.subsetofWords.length; i++) {
             const currentWord = this.subsetofWords[i];
             const wordtoCheck = {};
-            for(let j = 0; j < currentWord.length; j++)
+            for(let j = 0; j < currentWord.length; j++) {
                 if(wordtoCheck[currentWord[j]]) {
                     wordtoCheck[currentWord[j]] = wordtoCheck[currentWord[j]] + 1;
                 }
                 else {
                     wordtoCheck[currentWord[j]] = 1;
                 }
+            }
 
-                console.log(wordtoCheck);
+            let found = true;
+            for(let key in wordtoCheck){
+                if (wordtoCheck[key] > rootWordCounts[key] || !(rootWordCounts.hasOwnProperty(key))) {
+                    found = false;
+                }
+            }
+            if(found == true) {
+                this.subset.push(currentWord);
+            }
+            
+            //console.log(wordtoCheck);
+            
         }
 
         // for (let key in wordtoCheck) {
