@@ -104,12 +104,15 @@ class wordPlay{
     printWordstoGuess() {
         for(let i = 0; i < this.subset.length; i++) {
             let pattern = "";
-            for(let j = 0; j < this.subset[i].length; j++) {
-                if(!(this.guessedWords.indexOf(i) > -1)) {
+            let current = this.subset[i];
+            if (!(this.guessedWords.indexOf(i) > -1)) {
+                for(let j = 0; j < current.length; j++) {
                     pattern += "_ ";
                 }
-                else if (this.guessedWords.indexOf(i) > -1) {
-                    pattern = this.subset[i];
+            }
+            else if (this.guessedWords.indexOf(i) > -1) {
+                for(let x = 0; x < current.length; x++) {
+                    pattern += current[x];
                 }
             }
             console.log(pattern);
@@ -123,43 +126,43 @@ const w = tester.randomSixLetterWord();
 let scrambledWord = tester.scrambleRootWord(w);
 console.log(scrambledWord);
 tester.subsetWords();
-tester.printWordstoGuess();
 var guess = null;
 do {
     console.log("Letters available: " + scrambledWord);
-    //tester.printWordstoGuess();
+    tester.printWordstoGuess();
     guess = prompt("Enter your guess: ");
     if (guess == "*") {
         let newScrambled = tester.scrambleRootWord(scrambledWord);
         scrambledWord = newScrambled;
         console.log("Your word is being scrambled...");
         console.log(scrambledWord);
+        console.clear();
 
     }
-    else if (guess.length < 3) {
+    else if (guess.length < 3 && guess.length >= 0) {
         alert(guess + " is not a valid English word. Your guess is too short ");
+        console.clear();
     }
     else if (guess.length > 6) {
         alert(guess + " is not a valid English word. Your guess is too long ");
+        console.clear();
     }
     else if (tester.subset.indexOf(guess) > -1) {
         alert("Correct!");
         tester.guessedWords.push(guess); 
-        tester.printWordstoGuess();
         if (tester.subset.length == tester.guessedWords.length) {
             alert("Congratulations! You have guessed all the words!");
             guess = null;
         } 
+        console.clear();
     }
     else if (!(tester.subset.indexOf(guess) > -1)) {
-        console.log(guess + " is not a word!");  
+        alert(guess + " is not a word!");
+        console.clear();
     }
-    // else if (tester.subset.length == tester.guessedWords.length) {
-    //     alert("Congratulations! You have guessed all the words!");
-    //     guess = null;
-    // }
 } while (guess != null);
-console.log("You guessed " + this.guessedWords.length + " out of " + this.subset.length);
+
+console.log("You guessed " + tester.guessedWords.length + " out of " + tester.subset.length);
 for (let i = 0; i < tester.subset.length; i++) {
     console.log(tester.subset[i]);
 }
