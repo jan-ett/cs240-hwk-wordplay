@@ -1,3 +1,6 @@
+/**
+ * Creates a wordPlay game and instantiates field variables
+ */
 class wordPlay{
     constructor(wordBank) {
         this.words = dictionary;
@@ -8,7 +11,10 @@ class wordPlay{
         this.guessedWords = [];
     }
 
-    // Takes in the English dictionary and picks a random 6 letter word for the user to guess
+    /**
+     * Takes in the English dictionary and picks a random 6 letter word for the user to guess
+     * @returns the random word chosen
+     */
     randomSixLetterWord() {
         for(let i = 0; i < this.words.length; i++) {
             if(this.words[i].length == 6) {
@@ -22,7 +28,11 @@ class wordPlay{
         return randomWord;
     }
 
-    // Scrambles the root word and prints it to the console
+    /**
+     * Scrambles the root word and returns it to the console
+     * @param {*} word takes in the random six letter word that was already chosen
+     * @returns the scrambled word
+     */
     scrambleRootWord(word) {
         const wordArray = word.split("");
         const wordArrayLength = wordArray.length;
@@ -38,15 +48,18 @@ class wordPlay{
         return word;
     }
 
-    // Creates an array of words that are 3-6 characters long
+    /**
+     * Creates an array of words that are 3-6 characters long. Takes that array and creates a subset of words only containing
+     * characters in the root word
+     */
     subsetWords() {
+        // creates subset of words
         for (let i = 0; i < this.words.length; i++) {
             if (this.words[i].length <= 6 && this.words[i].length >= 3) {
                 this.subsetofWords.push(this.words[i]);
             }
         }
-        console.log(this.subsetofWords);
-
+        // creates an object literal that stores letter counts for the root word
         const rootWordCounts = {};
         for (let i = 0; i < this.sixLetterWord.length; i++) {
             if(rootWordCounts[this.sixLetterWord[i]]) {
@@ -57,7 +70,7 @@ class wordPlay{
             }
         }
         console.log(rootWordCounts);
-
+        // creates an object literal to store letter counts of each word in the subsetofWords
         for (let i = 0; i < this.subsetofWords.length; i++) {
             const currentWord = this.subsetofWords[i];
             const wordtoCheck = {};
@@ -69,7 +82,8 @@ class wordPlay{
                     wordtoCheck[currentWord[j]] = 1;
                 }
             }
-
+            // traverses through each word and checks that their letter counts match the root word counts and then adds them
+            // to the subset of words
             let found = true;
             for(let key in wordtoCheck){
                 if (wordtoCheck[key] > rootWordCounts[key] || !(rootWordCounts.hasOwnProperty(key))) {
@@ -79,14 +93,14 @@ class wordPlay{
             if(found == true) {
                 this.subset.push(currentWord);
             }
-            
-            //console.log(wordtoCheck);
-            
         }
         console.log(this.subset);
     }
     
-    // Prints the words that the user must guess from the subset of words array
+    /**
+     * Prints the words that the user must guess from the subset of words array in a hidden manner
+     */
+    
     printWordstoGuess() {
         for(let i = 0; i < this.subset.length; i++) {
             let pattern = "";
@@ -98,7 +112,7 @@ class wordPlay{
     }
 }
 
-//creates an instance of wordPlay to test methods
+//creates an instance of wordPlay to test methods and playes the game
 const tester = new wordPlay();
 const w = tester.randomSixLetterWord();
 let scrambledWord = tester.scrambleRootWord(w);
@@ -107,7 +121,7 @@ tester.subsetWords();
 var guess = null;
 do {
     console.log("Letters available: " + scrambledWord);
-    tester.printWordstoGuess();
+    //tester.printWordstoGuess();
     guess = prompt("Enter your guess: ");
     if (guess == "*") {
         let newScrambled = tester.scrambleRootWord(scrambledWord);
@@ -133,8 +147,4 @@ do {
         alert("Congratulations! You have guessed all the words!");
         guess = null;
     }
-
 } while (guess != null);
-//tester.subsetWords();
-//tester.userInteraction();
-//tester.printWordstoGuess();
