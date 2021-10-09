@@ -24,7 +24,6 @@ class wordPlay{
         const randomIndex = Math.floor(Math.random() * this.sixLetterWords.length);
         const randomWord = this.sixLetterWords[randomIndex];
         this.sixLetterWord = randomWord;
-        console.log(randomWord);
         return randomWord;
     }
 
@@ -69,7 +68,6 @@ class wordPlay{
                 rootWordCounts[this.sixLetterWord[i]] = 1;
             }
         }
-        console.log(rootWordCounts);
         // creates an object literal to store letter counts of each word in the subsetofWords
         for (let i = 0; i < this.subsetofWords.length; i++) {
             const currentWord = this.subsetofWords[i];
@@ -94,27 +92,40 @@ class wordPlay{
                 this.subset.push(currentWord);
             }
         }
-        console.log(this.subset);
     }
     
     /**
      * Prints the words that the user must guess from the subset of words array in a hidden manner
      */
     
+    // printWordstoGuess() {
+    //     for(let i = 0; i < this.subset.length; i++) {
+    //         let pattern = "";
+    //         let current = this.subset[i];
+    //         if (!(this.guessedWords.indexOf(i) > -1)) {
+    //             for(let j = 0; j < current.length; j++) {
+    //                 pattern += "_ ";
+    //             }
+    //         }
+    //         else if (this.guessedWords.indexOf(i) > -1) {
+    //             for(let x = 0; x < current.length; x++) {
+    //                 pattern += current[x];
+    //             }
+    //         }
+    //         console.log(pattern);
+    //     }
+    // }
     printWordstoGuess() {
         for(let i = 0; i < this.subset.length; i++) {
             let pattern = "";
             let current = this.subset[i];
-            if (!(this.guessedWords.indexOf(i) > -1)) {
-                for(let j = 0; j < current.length; j++) {
-                    pattern += "_ ";
-                }
-            }
-            else if (this.guessedWords.indexOf(i) > -1) {
                 for(let x = 0; x < current.length; x++) {
+                    if (this.guessedWords.indexOf(current) > -1)
                     pattern += current[x];
+                    else {
+                        pattern += "_ ";
+                    }
                 }
-            }
             console.log(pattern);
         }
     }
@@ -124,7 +135,6 @@ class wordPlay{
 const tester = new wordPlay();
 const w = tester.randomSixLetterWord();
 let scrambledWord = tester.scrambleRootWord(w);
-console.log(scrambledWord);
 tester.subsetWords();
 var guess = null;
 do {
