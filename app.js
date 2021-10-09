@@ -96,10 +96,6 @@ class wordPlay{
             console.log(pattern);
         }
     }
-
-    userInteraction() {
-        let input = prompt("Enter your guess:");
-    }
 }
 
 //creates an instance of wordPlay to test methods
@@ -107,29 +103,33 @@ const tester = new wordPlay();
 const w = tester.randomSixLetterWord();
 let scrambledWord = tester.scrambleRootWord(w);
 console.log(scrambledWord);
-tester.printWordstoGuess();
-//var input = prompt("Enter your guess");
+tester.subsetWords();
+var guess = null;
 do {
-    var input = prompt("Enter your guess");
     console.log("Letters available: " + scrambledWord);
-    if (input == "*") {
+    tester.printWordstoGuess();
+    guess = prompt("Enter your guess: ");
+    if (guess == "*") {
         let newScrambled = tester.scrambleRootWord(scrambledWord);
         scrambledWord = newScrambled;
         console.log("Your word is being scrambled...");
         console.log(scrambledWord);
 
     }
-    else if (input.length < 3) {
-        alert(input + " is not a valid English word. Your guess is too short ");
+    else if (guess.length < 3) {
+        alert(guess + " is not a valid English word. Your guess is too short ");
     }
-    else if (input.length > 6) {
-        alert(input + " is not a valid English word. Your guess is too long ");
+    else if (guess.length > 6) {
+        alert(guess + " is not a valid English word. Your guess is too long ");
     }
-    //else if () {
-        
-    //}
+    else if (tester.subset.indexOf(guess) > -1) {
+        tester.guessedWords.push(guess);  
+    }
+    else if (!(tester.subset.indexOf(guess) > -1)) {
+        console.log(guess + " is not a word!");  
+    }
 
-} while (input != null);
+} while (guess != null);
 //tester.subsetWords();
 //tester.userInteraction();
 //tester.printWordstoGuess();
