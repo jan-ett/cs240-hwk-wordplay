@@ -97,24 +97,6 @@ class wordPlay{
     /**
      * Prints the words that the user must guess from the subset of words array in a hidden manner
      */
-    
-    // printWordstoGuess() {
-    //     for(let i = 0; i < this.subset.length; i++) {
-    //         let pattern = "";
-    //         let current = this.subset[i];
-    //         if (!(this.guessedWords.indexOf(i) > -1)) {
-    //             for(let j = 0; j < current.length; j++) {
-    //                 pattern += "_ ";
-    //             }
-    //         }
-    //         else if (this.guessedWords.indexOf(i) > -1) {
-    //             for(let x = 0; x < current.length; x++) {
-    //                 pattern += current[x];
-    //             }
-    //         }
-    //         console.log(pattern);
-    //     }
-    // }
     printWordstoGuess() {
         for(let i = 0; i < this.subset.length; i++) {
             let pattern = "";
@@ -149,11 +131,11 @@ do {
         console.clear();
 
     }
-    else if (guess.length < 3 && guess.length >= 0) {
+    else if (guess != null && guess.length < 3 ) {
         alert(guess + " is not a valid English word. Your guess is too short ");
         console.clear();
     }
-    else if (guess.length > 6) {
+    else if (guess != null && guess.length > 6) {
         alert(guess + " is not a valid English word. Your guess is too long ");
         console.clear();
     }
