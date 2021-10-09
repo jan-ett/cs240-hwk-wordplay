@@ -123,10 +123,15 @@ do {
         alert(guess + " is not a valid English word. Your guess is too long ");
     }
     else if (tester.subset.indexOf(guess) > -1) {
+        alert("Correct!");
         tester.guessedWords.push(guess);  
     }
     else if (!(tester.subset.indexOf(guess) > -1)) {
         console.log(guess + " is not a word!");  
+    }
+    else if (tester.subset.length == tester.guessedWords.length) {
+        alert("Congratulations! You have guessed all the words!");
+        guess = null;
     }
 
 } while (guess != null);
