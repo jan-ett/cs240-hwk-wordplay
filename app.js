@@ -126,7 +126,7 @@ do {
     if (guess == "*") {
         let newScrambled = tester.scrambleRootWord(scrambledWord);
         scrambledWord = newScrambled;
-        console.log("Your word is being scrambled...");
+        alert("Your word is being scrambled...");
         console.log(scrambledWord);
         console.clear();
 
